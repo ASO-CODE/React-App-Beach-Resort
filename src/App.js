@@ -4,21 +4,20 @@ import Home from "./Pages/Home";
 import Rooms from "./Pages/Rooms";
 import SingleRoom from "./Pages/SingleRoom";
 import Error from "./Pages/Error";
-import { Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
     <>
-      <Routes><
-      <Route exact path="/" component={Home} />
-      <Route path="/rooms/" component={Rooms} />
-      <Route path="/single-room" component={SingleRoom} />
-        {/* <Route path="/" component={Home} /> */}
-        /Routes></Routes>
-      <Home />
-      <Rooms />
-      <SingleRoom />
-      <Error />
+      <Navbar />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/rooms/" element={<Rooms />} />
+        <Route exact path="/rooms/:cool" element={<SingleRoom />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      
     </>
   );
 }
