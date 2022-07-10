@@ -31,10 +31,12 @@ class RoomProvider extends Component {
     });
     return tempItems;
   }
-  getRoom = (cool) => {
+  getRoom = (slug) => {
     let tempRooms = [...this.state.rooms];
-    const room = tempRooms.find((room) => room.cool === cool);
+    const room = tempRooms.find((room) => room.slug === slug);
+    return room;
   };
+
   render() {
     return (
       <RoomContext.Provider value={{ ...this.state, getRoom: this.getRoom }}>
