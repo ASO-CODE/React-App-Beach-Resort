@@ -36,8 +36,12 @@ export default function RoomFilter({ rooms }) {
   // get unique capacity
   let people = getUnique(rooms, "capacity");
   people = people.map((item, index) => {
-    return <option key={index} value={item}>{ item}</option>
-  })
+    return (
+      <option key={index} value={item}>
+        {item}
+      </option>
+    );
+  });
   return (
     <section className="filter-container">
       <Title title="search rooms" />
@@ -72,10 +76,66 @@ export default function RoomFilter({ rooms }) {
         {/* end of guests */}
         {/* room price */}
         <div className="form-group">
-          <label for="type">room price ${ price}</label>
-          <input type="range" name="price" id="price" min={minPrice} max={maxPrice} value={price} onChange={handleChange} className="form-control" />
+          <label for="type">room price ${price}</label>
+          <input
+            type="range"
+            name="price"
+            id="price"
+            min={minPrice}
+            max={maxPrice}
+            value={price}
+            onChange={handleChange}
+            className="form-control"
+          />
         </div>
         {/* end of room price */}
+        {/* size */}
+        <div className="form-group">
+          <label for="size">room size</label>
+          <div className="size-inputs">
+            <input
+              type="number"
+              name="minSize"
+              id="price"
+              value={minSize}
+              onChange={handleChange}
+              className="size-input"
+            />
+            <input
+              type="number"
+              name="maxSize"
+              id="price"
+              value={maxSize}
+              onChange={handleChange}
+              className="size-input"
+            />
+          </div>
+        </div>
+        {/* end of size */}
+        {/* extras */}
+        <div className="form-group">
+          <div className="single-extra">
+            <input
+              type="checkbox"
+              name="breakfast"
+              id="breakfast"
+              checked={breakfast}
+              onChange={handleChange}
+            />
+            <label for="breakfast">breakfast</label>
+          </div>
+          <div className="single-extra">
+            <input
+              type="checkbox"
+              name="pets"
+              id="pets"
+              checked={pets}
+              onChange={handleChange}
+            />
+            <label for="pets">pets</label>
+          </div>
+        </div>
+        {/* end of extras */}
       </form>
     </section>
   );
