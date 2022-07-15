@@ -48,7 +48,7 @@ export default function RoomFilter({ rooms }) {
       <form action="" className="filter-form">
         {/* select type */}
         <div className="form-group">
-          <label for="type">room type</label>
+          <label htmlFor="type">room type</label>
           <select
             name="type"
             id="type"
@@ -62,7 +62,7 @@ export default function RoomFilter({ rooms }) {
         {/* end of select type */}
         {/* guests */}
         <div className="form-group">
-          <label for="capacity">Guests</label>
+          <label htmlFor="capacity">Guests</label>
           <select
             name="capacity"
             id="capacity"
@@ -76,7 +76,7 @@ export default function RoomFilter({ rooms }) {
         {/* end of guests */}
         {/* room price */}
         <div className="form-group">
-          <label for="type">room price ${price}</label>
+          <label htmlFor="type">room price ${price}</label>
           <input
             type="range"
             name="price"
@@ -91,7 +91,7 @@ export default function RoomFilter({ rooms }) {
         {/* end of room price */}
         {/* size */}
         <div className="form-group">
-          <label for="size">room size</label>
+          <label htmlFor="size">room size</label>
           <div className="size-inputs">
             <input
               type="number"
@@ -122,7 +122,7 @@ export default function RoomFilter({ rooms }) {
               checked={breakfast}
               onChange={handleChange}
             />
-            <label for="breakfast">breakfast</label>
+            <label htmlFor="breakfast">breakfast</label>
           </div>
           <div className="single-extra">
             <input
@@ -132,7 +132,7 @@ export default function RoomFilter({ rooms }) {
               checked={pets}
               onChange={handleChange}
             />
-            <label for="pets">pets</label>
+            <label htmlFor="pets">pets</label>
           </div>
         </div>
         {/* end of extras */}

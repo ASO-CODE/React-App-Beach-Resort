@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import items from "./data";
+// import items from "./data";
+import Client from "./Contentful";
+
 const RoomContext = React.createContext();
 class RoomProvider extends Component {
   state = {
@@ -18,32 +20,43 @@ class RoomProvider extends Component {
     pets: false,
   };
   // getData
+  getData = async () => {
+    try {
+      let response = await Client.getEntries({
+        content_type: "beachResort",
+        order: "sys.createdAt",
+        // order: "-fields.price",
+      });
+      let rooms = this.formatData(response.items);
+      console.log(rooms);
+      let featuredRooms = rooms.filter((room) => room.featured === true);
 
+      let minPrice = Math.min(...rooms.map((item) => item.price));
+      let maxPrice = Math.max(...rooms.map((item) => item.price));
+      let maxSize = Math.max(...rooms.map((item) => item.size));
+
+      this.setState({
+        rooms,
+        featuredRooms,
+        sortedRooms: rooms,
+        loading: false,
+      });
+      this.setState({
+        rooms,
+        featuredRooms,
+        sortedRooms: rooms,
+        loading: false,
+        price: maxPrice,
+        minPrice,
+        maxPrice,
+        maxSize,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   componentDidMount() {
-    let rooms = this.formatData(items);
-    console.log(rooms);
-    let featuredRooms = rooms.filter((room) => room.featured === true);
-
-    let minPrice = Math.min(...rooms.map((item) => item.price));
-    let maxPrice = Math.max(...rooms.map((item) => item.price));
-    let maxSize = Math.max(...rooms.map((item) => item.size));
-
-    this.setState({
-      rooms,
-      featuredRooms,
-      sortedRooms: rooms,
-      loading: false,
-    });
-    this.setState({
-      rooms,
-      featuredRooms,
-      sortedRooms: rooms,
-      loading: false,
-      price: maxPrice,
-      minPrice,
-      maxPrice,
-      maxSize,
-    });
+    this.getData();
   }
 
   formatData(items) {
@@ -92,7 +105,7 @@ class RoomProvider extends Component {
 
     // filter by price
     tempRooms = tempRooms.filter((room) => room.price <= price);
-    
+
     // filter by size
     tempRooms = tempRooms.filter(
       (room) => room.size >= minSize && room.size <= maxSize
